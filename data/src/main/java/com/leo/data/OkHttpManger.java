@@ -2,6 +2,8 @@ package com.leo.data;
 
 import android.util.Log;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
@@ -12,8 +14,13 @@ import okhttp3.logging.HttpLoggingInterceptor;
  */
 public class OkHttpManger {
 
+    private static final int TIME_OUT = 10;
+
     private static class SingletonHolder {
         private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
+                .readTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(getHttpLoggingInterceptor())
                 .build();
     }
@@ -26,7 +33,7 @@ public class OkHttpManger {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.d("SuperBrokerApp", "body: "+message);
+                Log.d("SuperBrokerApp", "body: " + message);
             }
         });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
