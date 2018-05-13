@@ -15,17 +15,15 @@ import io.reactivex.Single;
  */
 public class TaskClouds {
 
-    private static TaskService service;
-
-    private static TaskService getService() {
-        if (service == null) {
-            service = RetrofitManger.getInsatance().create(TaskService.class);
+    private static class ServiceSingleton{
+        private static final TaskService SERVICE = RetrofitManger.getInsatance().create(TaskService.class);
+        static TaskService getService(){
+            return SERVICE;
         }
-        return service;
     }
 
     public static Single<TaskModel> getTaskData(PostTaskModel body) {
-        return RxUtils.compile(getService().getTaskData(body));
+        return RxUtils.compile(ServiceSingleton.getService().getTaskData(body));
     }
 
 }

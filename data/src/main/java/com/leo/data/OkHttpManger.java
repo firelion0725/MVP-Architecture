@@ -1,5 +1,6 @@
 package com.leo.data;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -25,17 +26,12 @@ public class OkHttpManger {
                 .build();
     }
 
-    public static OkHttpClient getInsatance() {
+    public static OkHttpClient getInstance() {
         return SingletonHolder.OK_HTTP_CLIENT;
     }
 
     private static HttpLoggingInterceptor getHttpLoggingInterceptor() {
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                Log.d("SuperBrokerApp", "body: " + message);
-            }
-        });
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Log.d("OkHttpManger", "body: " + message));
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
     }

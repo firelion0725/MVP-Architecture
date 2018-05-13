@@ -14,7 +14,7 @@ public class RetrofitManger {
     private static class SingletonHolder {
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
                 .baseUrl(BaseUrlManger.BASE_URL)
-                .client(OkHttpManger.getInsatance())
+                .client(OkHttpManger.getInstance())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
