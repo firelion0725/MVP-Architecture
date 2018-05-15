@@ -1,15 +1,19 @@
 package com.leo.test.business.task;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import com.leo.data.dao.db.MessageDAO;
 import com.leo.data.dao.db.MessageRealmDao;
+import com.leo.data.dao.db.TestRealmDAO;
 import com.leo.data.dao.transform.TransformUtils;
 import com.leo.data.db.RealmUtils;
 import com.leo.data.db.SqlHelper;
 import com.leo.data.rx.AbstractSubscriber;
 import com.leo.test.base.BasePresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -25,8 +29,9 @@ import io.realm.RealmResults;
 public class TaskPresenterImpl extends BasePresenter<TaskContract.TaskView> implements TaskContract.TaskPresenter {
 
     private TaskContract.TaskView view;
-
     Realm realm;
+
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Inject
     public TaskPresenterImpl(TaskContract.TaskView view) {
@@ -36,6 +41,10 @@ public class TaskPresenterImpl extends BasePresenter<TaskContract.TaskView> impl
     @Override
     public void getData() {
         realm = RealmUtils.getDefaultConfigRealm();
+        realm.setAutoRefresh(false);
+        addRealm();
+//        delete(view.getViewApplicationContext()).getApplicationContext(), realm, TestRealmDAO.class, "name", "数据1");
+        showRealm();
 //        PostTaskModel body = new PostTaskModel("18302278175", "abcd0987");
 //
 //        TaskClouds.getTaskData(body)
@@ -72,7 +81,8 @@ public class TaskPresenterImpl extends BasePresenter<TaskContract.TaskView> impl
 //        RealmUtils.add(realm, body);
 //        RealmUtils.add(realm, body2);
 
-        RealmUtils.query(realm, MessageRealmDao.class, "id").subscribe(new AbstractSubscriber<RealmResults<MessageRealmDao>>() {
+        RealmUtils.query(realm, MessageRealmDao.class, "id")
+                .subscribe(new AbstractSubscriber<RealmResults<MessageRealmDao>>() {
             @Override
             public void onNext(RealmResults<MessageRealmDao> postTaskModels) {
                 Log.i("testRealm", "query success:" + postTaskModels.size());
@@ -90,8 +100,37 @@ public class TaskPresenterImpl extends BasePresenter<TaskContract.TaskView> impl
         });
     }
 
+    private void showRealm() {
+        handler.postDelayed(()->  RealmUtils.query(realm, TestRealmDAO.class, "id").subscribe(new AbstractSubscriber<RealmResults<TestRealmDAO>>() {
+            @Override
+            public void onNext(RealmResults<TestRealmDAO> postTaskModels) {
+                Log.i("testRealm", "query success:" + postTaskModels.size());
+                List<TestRealmDAO> list = postTaskModels.subList(0, postTaskModels.size());
+                for (TestRealmDAO model : list) {
+                    Log.i("testRealm", "data:" + model);
+                }
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                Log.i("testRealm", "query error:");
+                t.printStackTrace();
+            }
+        }),100);
+
+    }
+
     private void addRealm(List<MessageDAO> list) {
         List<MessageRealmDao> realmDaos = TransformUtils.transformMessageDaos(list);
+        RealmUtils.addList(realm, realmDaos);
+    }
+
+    void addRealm() {
+        List<TestRealmDAO> realmDaos = new ArrayList<>(3);
+        for (int i = 1; i < 4; i++) {
+            TestRealmDAO dao = new TestRealmDAO(i, "数据" + i);
+            realmDaos.add(dao);
+        }
         RealmUtils.addList(realm, realmDaos);
     }
 
@@ -113,5 +152,22 @@ public class TaskPresenterImpl extends BasePresenter<TaskContract.TaskView> impl
             Log.i("DB Helper", "message:" + messageDAO);
         }
     }
+
+//    /**
+//     * 异步删除指定记录
+//     *
+//     * @param clazz RealmObject 字节码
+//     * @param field 数据库中的列名
+//     * @param value 对应的列值
+//     */
+//    public static <E extends RealmObject> void delete(Context context, Realm realm, Class<E> clazz, String field, String value) {
+//        realm.executeTransactionAsync(realm1 -> {
+//                    E e = realm1.where(clazz).findFirst();
+//                    if (e != null) {
+//                        e.deleteFromRealm();
+//                    }
+//                }, () -> Toast.makeText(context, "删除成功", Toast.LENGTH_SHORT).show()
+//                , error -> Toast.makeText(context, "更新失败", Toast.LENGTH_SHORT).show());
+//    }
 
 }

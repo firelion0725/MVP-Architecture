@@ -19,4 +19,6 @@ public interface BaseView {
     void show(String string);
 
     Context getViewContext();
+
+    Context getViewApplicationContext();
 }

@@ -6,4 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".business.task.TaskActivity">
 
+    <Button
+        android:id="@+id/button"
+        android:text="add_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </android.support.constraint.ConstraintLayout>

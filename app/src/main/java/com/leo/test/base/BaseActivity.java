@@ -39,6 +39,11 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
         return this;
     }
 
+    @Override
+    public Context getViewApplicationContext() {
+        return this.getApplicationContext();
+    }
+
     /**
      * 通过模板方法加入layout id
      *

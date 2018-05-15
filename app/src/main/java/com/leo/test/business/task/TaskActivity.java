@@ -1,6 +1,7 @@
 package com.leo.test.business.task;
 
 import android.util.Log;
+import android.widget.Button;
 
 import com.leo.test.R;
 import com.leo.test.base.BaseRxLifecycleActivity;
@@ -12,6 +13,8 @@ import com.leo.test.business.user.UserActivity;
  * @function 任务类
  */
 public class TaskActivity extends BaseRxLifecycleActivity<TaskPresenterImpl> implements TaskContract.TaskView {
+
+    Button button;
 
     @Override
     protected int getLayoutResID() {
@@ -25,7 +28,8 @@ public class TaskActivity extends BaseRxLifecycleActivity<TaskPresenterImpl> imp
 
     @Override
     protected void setupView() {
-
+        button = findViewById(R.id.button);
+        button.setOnClickListener(v->presenter.addRealm());
     }
 
     @Override

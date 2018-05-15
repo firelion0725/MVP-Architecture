@@ -44,6 +44,11 @@ public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Su
         return this.getActivity();
     }
 
+    @Override
+    public Context getViewApplicationContext() {
+        return this.getViewContext().getApplicationContext();
+    }
+
     /**
      * 通过模板方法加入layout id
      *
