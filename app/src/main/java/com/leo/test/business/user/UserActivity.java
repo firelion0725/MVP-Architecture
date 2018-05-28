@@ -1,6 +1,7 @@
 package com.leo.test.business.user;
 
 import android.util.Log;
+import android.widget.FrameLayout;
 
 import com.leo.test.R;
 import com.leo.test.base.BaseRxLifecycleActivity;
@@ -12,6 +13,8 @@ import com.leo.test.order.list.ListActivity;
  * @function 用户类
  */
 public class UserActivity extends BaseRxLifecycleActivity<UserPresenterImpl> implements UserContract.UserView {
+
+    FrameLayout containerLayout;
 
     @Override
     protected int getLayoutResID() {
@@ -25,7 +28,8 @@ public class UserActivity extends BaseRxLifecycleActivity<UserPresenterImpl> imp
 
     @Override
     protected void setupView() {
-
+        containerLayout = findViewById(R.id.container_layout);
+//        replaceFragment(userFragment, false);
     }
 
     @Override

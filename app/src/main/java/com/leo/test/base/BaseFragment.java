@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
@@ -17,6 +19,7 @@ import me.yokeyword.fragmentation.SupportFragment;
  */
 public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends SupportFragment implements BaseFragmentView {
 
+    @Inject
     protected P presenter;
 
     @Nullable
@@ -28,7 +31,6 @@ public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Su
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setupPresenter(getupPresenter());
         presenter.takeView(this);
     }
 
@@ -65,14 +67,5 @@ public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Su
      * 初始化视图数据
      */
     protected abstract void setupView();
-
-    /**
-     * 初始化Presenter
-     */
-    protected abstract BasePresenter getupPresenter();
-
-    private void setupPresenter(BasePresenter basePresenter) {
-        presenter = (P) basePresenter;
-    }
 
 }

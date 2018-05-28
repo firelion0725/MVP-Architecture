@@ -5,7 +5,9 @@ import android.widget.Button;
 
 import com.leo.test.R;
 import com.leo.test.base.BaseRxLifecycleActivity;
-import com.leo.test.business.user.UserActivity;
+import com.leo.test.third.ThirdObject;
+
+import javax.inject.Inject;
 
 /**
  * @author leo, ZhangWei
@@ -15,6 +17,9 @@ import com.leo.test.business.user.UserActivity;
 public class TaskActivity extends BaseRxLifecycleActivity<TaskPresenterImpl> implements TaskContract.TaskView {
 
     Button button;
+
+    @Inject
+    ThirdObject thirdObject;
 
     @Override
     protected int getLayoutResID() {
@@ -29,7 +34,9 @@ public class TaskActivity extends BaseRxLifecycleActivity<TaskPresenterImpl> imp
     @Override
     protected void setupView() {
         button = findViewById(R.id.button);
-        button.setOnClickListener(v->presenter.addRealm());
+        button.setOnClickListener(v -> presenter.addRealm());
+
+        show(thirdObject.toString());
     }
 
     @Override

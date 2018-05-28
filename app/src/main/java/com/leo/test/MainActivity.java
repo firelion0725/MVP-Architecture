@@ -1,6 +1,5 @@
 package com.leo.test;
 
-import com.leo.test.base.BasePresenter;
 import com.leo.test.base.BaseRxLifecycleActivity;
 
 /**

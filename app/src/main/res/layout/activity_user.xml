@@ -6,4 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".business.user.UserActivity">
 
+    <FrameLayout
+        android:id="@+id/container_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </android.support.constraint.ConstraintLayout>
