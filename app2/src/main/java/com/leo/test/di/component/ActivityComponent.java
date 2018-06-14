@@ -1,8 +1,8 @@
 package com.leo.test.di.component;
 
 
+import com.leo.test.business.task.TaskActivity;
 import com.leo.test.di.scoped.ActivityScoped;
-import com.leo.test.task.TaskActivity;
 
 import dagger.Component;
 

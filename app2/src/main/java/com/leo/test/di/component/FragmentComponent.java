@@ -1,6 +1,7 @@
 package com.leo.test.di.component;
 
 
+import com.leo.test.business.user.UserFragment;
 import com.leo.test.di.scoped.FragmentScoped;
 
 import dagger.Component;
@@ -12,5 +13,5 @@ import dagger.Component;
 @FragmentScoped
 @Component
 public interface FragmentComponent {
-//    void inject(UserFragment fragment);
+    void inject(UserFragment fragment);
 }
