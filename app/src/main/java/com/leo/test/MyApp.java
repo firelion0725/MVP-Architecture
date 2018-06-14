@@ -1,6 +1,5 @@
 package com.leo.test;
 
-import com.leo.data.db.RealmUtils;
 import com.leo.test.di.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
@@ -22,6 +21,5 @@ public class MyApp extends DaggerApplication {
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder().application(this).build();
-//        return null;
     }
 }
