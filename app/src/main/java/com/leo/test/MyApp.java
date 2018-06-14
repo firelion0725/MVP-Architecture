@@ -16,11 +16,12 @@ public class MyApp extends DaggerApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        RealmUtils.initRealm(getApplicationContext());
+//        RealmUtils.initRealm(getApplicationContext());
     }
 
     @Override
     protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
         return DaggerAppComponent.builder().application(this).build();
+//        return null;
     }
 }

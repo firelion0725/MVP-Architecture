@@ -1,13 +1,14 @@
 package com.leo.test.business.user;
 
 import com.leo.test.R;
+import com.leo.test.base.BaseFragment;
 import com.leo.test.base.BaseRxLifecycleFragment;
 
 /**
  * @author leo, ZhangWei
  * @date 2018/5/28
  */
-public class UserFragment extends BaseRxLifecycleFragment implements UserContract.UserView {
+public class UserFragment extends BaseFragment implements UserContract.UserView {
 
     @Override
     protected int getLayoutResID() {

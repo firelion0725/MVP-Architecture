@@ -2,41 +2,28 @@ package com.leo.test.base;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.util.Log;
 
 import javax.inject.Inject;
-
-import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * @author leo, ZhangWei
  * @date 2018/4/19
  * @function
  */
-public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends SupportFragment implements BaseFragmentView {
+public abstract class BaseFragment<P extends BasePresenter> extends BaseAnalyticsAgentFragment implements BaseFragmentView {
 
     @Inject
     protected P presenter;
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutResID(), container, false);
-    }
-
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        presenter.takeView(this);
-    }
-
-    @Override
-    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
-        super.onLazyInitView(savedInstanceState);
+        Log.i("BaseFragment", "presenter:" + presenter);
+        if (presenter != null) {
+            presenter.takeView(this);
+        }
         initData();
         setupView();
     }
@@ -51,12 +38,13 @@ public abstract class BaseFragment<P extends BasePresenter<BaseView>> extends Su
         return this.getViewContext().getApplicationContext();
     }
 
-    /**
-     * 通过模板方法加入layout id
-     *
-     * @return layout id
-     */
-    protected abstract int getLayoutResID();
+    @Override
+    public void onDestroy() {
+        if (presenter != null) {
+            presenter.dropView();
+        }
+        super.onDestroy();
+    }
 
     /**
      * 初始化数据

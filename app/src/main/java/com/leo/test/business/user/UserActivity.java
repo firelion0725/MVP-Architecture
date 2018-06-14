@@ -4,15 +4,14 @@ import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.leo.test.R;
-import com.leo.test.base.BaseRxLifecycleActivity;
-import com.leo.test.order.list.ListActivity;
+import com.leo.test.base.BaseActivity;
 
 /**
  * @author leo, ZhangWei
  * @date 2018/4/19
  * @function 用户类
  */
-public class UserActivity extends BaseRxLifecycleActivity<UserPresenterImpl> implements UserContract.UserView {
+public class UserActivity extends BaseActivity<UserPresenterImpl> implements UserContract.UserView {
 
     FrameLayout containerLayout;
 
@@ -35,7 +34,6 @@ public class UserActivity extends BaseRxLifecycleActivity<UserPresenterImpl> imp
     @Override
     public void showData(String str) {
         Log.i("UserActivity", "show Data:" + str);
-        goActivity(ListActivity.class);
     }
 
     @Override

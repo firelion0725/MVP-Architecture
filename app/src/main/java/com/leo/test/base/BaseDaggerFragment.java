@@ -17,7 +17,7 @@ import dagger.internal.Beta;
  * @function
  */
 @Beta
-public abstract class BaseDaggerFragment extends BaseFragment implements HasSupportFragmentInjector {
+public abstract class BaseDaggerFragment extends Fragment implements HasSupportFragmentInjector {
     @Inject
     DispatchingAndroidInjector<Fragment> childFragmentInjector;
 

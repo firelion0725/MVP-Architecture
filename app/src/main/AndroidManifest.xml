@@ -22,8 +22,6 @@
             android:launchMode="singleTask" />
         <activity android:name=".business.task.TaskActivity" />
         <activity android:name=".business.user.UserActivity" />
-        <activity android:name=".order.list.ListActivity" />
-        <activity android:name=".order.rider.RiderActivity" />
     </application>
 
 </manifest>

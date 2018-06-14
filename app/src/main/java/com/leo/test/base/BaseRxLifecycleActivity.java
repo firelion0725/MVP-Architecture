@@ -10,7 +10,6 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.FragmentEvent;
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
 
 import io.reactivex.Observable;
@@ -21,7 +20,7 @@ import io.reactivex.subjects.BehaviorSubject;
  * @date 2018/4/19
  * @function
  */
-public abstract class BaseRxLifecycleActivity<P extends BasePresenter> extends BaseDaggerActivity<P> implements LifecycleProvider<ActivityEvent> {
+public abstract class BaseRxLifecycleActivity extends BaseDaggerActivity implements LifecycleProvider<ActivityEvent> {
 
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 

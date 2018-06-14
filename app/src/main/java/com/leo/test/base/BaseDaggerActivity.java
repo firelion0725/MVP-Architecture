@@ -3,6 +3,7 @@ package com.leo.test.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
@@ -19,7 +20,7 @@ import dagger.internal.Beta;
  * @function
  */
 @Beta
-public abstract class BaseDaggerActivity<P extends BasePresenter> extends BaseActivity<P> implements HasFragmentInjector, HasSupportFragmentInjector {
+public abstract class BaseDaggerActivity extends AppCompatActivity implements HasFragmentInjector, HasSupportFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Fragment> supportFragmentInjector;

@@ -1,20 +1,18 @@
 package com.leo.test.base;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import javax.inject.Inject;
-
-import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * @author leo, ZhangWei
  * @date 2018/4/19
  * @function
  */
-public abstract class BaseActivity<P extends BasePresenter> extends SupportActivity implements BaseActivityView {
+public abstract class BaseActivity<P extends BasePresenter> extends BaseAnalyticsAgentActivity implements BaseActivityView {
 
     @Inject
     protected P presenter;
@@ -22,15 +20,19 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutResID());
-        presenter.takeView(this);
+        Log.i("BaseActivity", "presenter:" + presenter);
+        if (presenter != null) {
+            presenter.takeView(this);
+        }
         initData();
         setupView();
     }
 
     @Override
     protected void onDestroy() {
-        presenter.dropView();
+        if (presenter != null) {
+            presenter.dropView();
+        }
         super.onDestroy();
     }
 
@@ -45,13 +47,6 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
     }
 
     /**
-     * 通过模板方法加入layout id
-     *
-     * @return layout id
-     */
-    protected abstract int getLayoutResID();
-
-    /**
      * 初始化数据
      */
     protected abstract void initData();
@@ -60,9 +55,4 @@ public abstract class BaseActivity<P extends BasePresenter> extends SupportActiv
      * 初始化视图数据
      */
     protected abstract void setupView();
-
-    protected void goActivity(Class<?> cls) {
-        startActivity(new Intent(this, cls));
-    }
-
 }

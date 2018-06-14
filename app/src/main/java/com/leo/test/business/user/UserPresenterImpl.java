@@ -6,7 +6,7 @@ import com.leo.data.dao.load.TaskModel;
 import com.leo.data.dao.upload.PostTaskModel;
 import com.leo.data.rx.AbstractSingleHttp;
 import com.leo.data.task.TaskClouds;
-import com.leo.test.base.BasePresenter;
+import com.leo.test.base.BaseMvpPresenter;
 
 import javax.inject.Inject;
 
@@ -15,7 +15,7 @@ import javax.inject.Inject;
  * @date 2018/4/19
  * @function
  */
-public class UserPresenterImpl extends BasePresenter<UserContract.UserView> implements UserContract.UserPresenter {
+public class UserPresenterImpl extends BaseMvpPresenter<UserContract.UserView> implements UserContract.UserPresenter {
 
     private UserContract.UserView view;
 

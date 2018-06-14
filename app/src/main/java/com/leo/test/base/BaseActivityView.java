@@ -10,7 +10,7 @@ import com.trello.rxlifecycle2.android.ActivityEvent;
  * @date 2018/4/19
  * @function
  */
-public interface BaseActivityView extends BaseView{
+public interface BaseActivityView extends BaseView {
 
     <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event);
 }
