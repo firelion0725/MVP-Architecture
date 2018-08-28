@@ -26,21 +26,21 @@ public class UserPresenterImpl extends BaseMvpPresenter<UserContract.UserView> i
 
     @Override
     public void getData() {
-        PostTaskModel body = new PostTaskModel("18302278175", "abcd0987");
-        TaskClouds.getTaskData(body)
-                .compose(view.<TaskModel>bindToLifecycle())
-                .subscribe(new AbstractSingleHttp<TaskModel>() {
-
-                    @Override
-                    public void onSuccess(TaskModel taskModel) {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                    }
-                });
+//        PostTaskModel body = new PostTaskModel("18302278175", "abcd0987");
+//        TaskClouds.getTaskData(body)
+//                .compose(view.<TaskModel>bindToLifecycle())
+//                .subscribe(new AbstractSingleHttp<TaskModel>() {
+//
+//                    @Override
+//                    public void onSuccess(TaskModel taskModel) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        e.printStackTrace();
+//                    }
+//                });
 
         String msg = "this is get data";
         view.showData(msg);

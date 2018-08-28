@@ -4,8 +4,10 @@ package com.leo.test.di;
 import com.leo.test.business.task.TaskActivity;
 import com.leo.test.business.task.di.TaskModule;
 import com.leo.test.business.user.UserActivity;
+import com.leo.test.business.user.UserFragment;
 import com.leo.test.business.user.di.UserModule;
 import com.leo.test.scoped.ActivityScoped;
+import com.leo.test.scoped.FragmentScoped;
 import com.leo.test.third.di.ThirdModules;
 
 import dagger.Module;
@@ -25,7 +27,7 @@ public abstract class BusinessBindingModule {
     @ContributesAndroidInjector(modules = {TaskModule.class, ThirdModules.class})
     abstract TaskActivity tasksActivity();
 
-    @ActivityScoped
+    @FragmentScoped
     @ContributesAndroidInjector(modules = {UserModule.class})
-    abstract UserActivity userActivity();
+    abstract UserFragment userFragment();
 }

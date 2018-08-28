@@ -7,10 +7,14 @@ import android.util.Log;
 import com.leo.data.dao.db.MessageDAO;
 import com.leo.data.dao.db.MessageRealmDao;
 import com.leo.data.dao.db.TestRealmDAO;
+import com.leo.data.dao.load.TaskModel;
 import com.leo.data.dao.transform.TransformUtils;
+import com.leo.data.dao.upload.PostTaskModel;
 import com.leo.data.db.RealmUtils;
 import com.leo.data.db.SqlHelper;
+import com.leo.data.rx.AbstractSingleHttp;
 import com.leo.data.rx.AbstractSubscriber;
+import com.leo.data.task.TaskClouds;
 import com.leo.test.base.BaseMvpPresenter;
 
 import java.util.ArrayList;
@@ -45,22 +49,22 @@ public class TaskPresenterImpl extends BaseMvpPresenter<TaskContract.TaskView> i
 //        addRealm();
 //        delete(view.getViewApplicationContext()).getApplicationContext(), realm, TestRealmDAO.class, "name", "数据1");
 //        showRealm();
-//        PostTaskModel body = new PostTaskModel("18302278175", "abcd0987");
-//
-//        TaskClouds.getTaskData(body)
-//                .compose(view.bindToLifecycle())
-//                .subscribe(new AbstractSingleHttp<TaskModel>() {
-//
-//                    @Override
-//                    public void onSuccess(TaskModel taskModel) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        e.printStackTrace();
-//                    }
-//                });
+        PostTaskModel body = new PostTaskModel("18302278175", "abcd0987");
+
+        TaskClouds.getTaskData(body)
+                .compose(view.bindToLifecycle())
+                .subscribe(new AbstractSingleHttp<TaskModel>() {
+
+                    @Override
+                    public void onSuccess(TaskModel taskModel) {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                });
 
         String msg = "this is get data";
         view.showData(msg);

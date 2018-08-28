@@ -14,6 +14,7 @@ import javax.inject.Inject;
  */
 public abstract class BaseActivity<P extends BasePresenter> extends BaseAnalyticsAgentActivity implements BaseActivityView {
 
+    @Nullable
     @Inject
     protected P presenter;
 

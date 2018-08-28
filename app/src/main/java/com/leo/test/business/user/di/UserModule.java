@@ -1,9 +1,10 @@
 package com.leo.test.business.user.di;
 
-import com.leo.test.business.user.UserActivity;
 import com.leo.test.business.user.UserContract;
+import com.leo.test.business.user.UserFragment;
 import com.leo.test.business.user.UserPresenterImpl;
 import com.leo.test.scoped.ActivityScoped;
+import com.leo.test.scoped.FragmentScoped;
 
 import dagger.Binds;
 import dagger.Module;
@@ -17,12 +18,20 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class UserModule {
 
-    @ContributesAndroidInjector
-    abstract UserActivity usersActivity();
+//    @ContributesAndroidInjector
+//    abstract UserFragment userFragment();
+//
+//    @FragmentScoped
+//    @Binds
+//    abstract UserContract.UserView userView(UserFragment fragment);
+//
+//    @ActivityScoped
+//    @Binds
+//    abstract UserContract.UserPresenter userPresenter(UserPresenterImpl presenter);
 
-    @ActivityScoped
-    @Binds
-    abstract UserContract.UserView userView(UserActivity activity);
+//    @FragmentScoped
+    @ContributesAndroidInjector
+    abstract UserFragment userFragment();
 
     @ActivityScoped
     @Binds

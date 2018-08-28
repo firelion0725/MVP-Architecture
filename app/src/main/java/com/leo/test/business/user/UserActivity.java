@@ -1,6 +1,7 @@
 package com.leo.test.business.user;
 
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.leo.test.R;
@@ -15,6 +16,13 @@ public class UserActivity extends BaseActivity<UserPresenterImpl> implements Use
 
     FrameLayout containerLayout;
 
+//    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_user);
+//        setFragment();
+//    }
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_user;
@@ -22,18 +30,25 @@ public class UserActivity extends BaseActivity<UserPresenterImpl> implements Use
 
     @Override
     protected void initData() {
-        presenter.getData();
+
     }
 
     @Override
     protected void setupView() {
         containerLayout = findViewById(R.id.container_layout);
-//        replaceFragment(userFragment, false);
+        setFragment();
+    }
+
+    private void setFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.container_layout, UserFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
     public void showData(String str) {
-        Log.i("UserActivity", "show Data:" + str);
+
     }
 
     @Override
